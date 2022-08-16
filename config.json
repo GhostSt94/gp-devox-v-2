@@ -1,0 +1,31 @@
+{
+    "isProduction": false,
+    "serverPort": 9090,
+    "clientPort": 8080,
+	"webServer": "com.server.webServer",
+	"standardVerticles": [
+        "com.services.DB",
+        "com.services.Project",
+        "com.services.User",
+        "com.services.Client",
+        "com.services.Facture",
+        "com.services.Comment",
+        "com.services.Attachement",
+        "com.services.Upload"
+    ],
+	"workerVerticles": [],
+    "db": {
+        "connection_string": "mongodb://localhost",
+        "db_name": "testDB"
+    },
+	"uploadDirectory": "upload",
+    "mail": {
+        "hostname": "smtp.gmail.com",
+        "port": 465,
+        "ssl": true,
+        "starttls": "REQUIRED",
+        "authMethods": "DIGEST-MD5, CRAM-SHA256, CRAM-SHA1, CRAM-MD5, PLAIN, LOGIN",
+        "username": "reda.benammi94@gmail.com",
+        "password": "cbyczsczuzxletaq"
+    }
+}

@@ -1,0 +1,1038 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Sample API",
+		"version": "0.1.0"
+	},
+	"paths": {
+		"/*": {
+			"get": {
+				"description": "all requests",
+				"operationId": "GET",
+				"responses": {
+					"200": {
+						"description": "ok"
+					}
+				}
+			},
+			"post": {
+				"summary": "all requests",
+				"operationId": "POST",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EmptyObj"
+							}
+						},
+						"multipart/form-data": {
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/upload/*": {
+			"get": {
+				"description": "get public resources (imgs, files ...)",
+				"operationId": "uploads",
+				"responses": {
+					"200": {
+						"description": "ok"
+					}
+				}
+			}
+		},
+		"/login": {
+			"post": {
+				"summary": "login",
+				"operationId": "login",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"username": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"username",
+									"password"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/logout": {
+			"post": {
+				"summary": "login",
+				"operationId": "logout",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EmptyObj"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/getSessionUser": {
+			"post": {
+				"summary": "all requests",
+				"operationId": "getSessionUser",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EmptyObj"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/*": {
+			"get": {
+				"description": "all requests",
+				"operationId": "privateGET",
+				"responses": {
+					"200": {
+						"description": "ok"
+					}
+				}
+			},
+			"post": {
+				"summary": "all requests",
+				"operationId": "privatePOST",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EmptyObj"
+							}
+						},
+						"multipart/form-data": {
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/user/list": {
+			"post": {
+				"summary": "get users list",
+				"operationId": "listUser",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"query": {
+										"type": "object"
+									},
+									"options": {
+										"$ref": "#/components/schemas/Pagination"
+									}
+								},
+								"required": [
+									"query"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/user/create": {
+			"post": {
+				"summary": "create new user",
+				"operationId": "createUser",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"username": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string"
+									},
+									"email": {
+										"type": "string"
+									},
+									"role": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"username",
+									"email"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/user/update": {
+			"post": {
+				"summary": "update a user",
+				"operationId": "updateUser",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/user/remove": {
+			"post": {
+				"summary": "remove a user",
+				"operationId": "removeUser",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/user/password/change": {
+			"post": {
+				"summary": "change password",
+				"operationId": "changePassword",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"user_id": {
+										"type": "string"
+									},
+									"oldPassword": {
+										"type": "string"
+									},
+									"newPassword": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"user_id",
+									"oldPassword",
+									"newPassword"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/user/password/generate": {
+			"post": {
+				"summary": "generate new password to user",
+				"operationId": "generatePassword",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"user": {
+										"type": "object"
+									}
+								},
+								"required": [
+									"user"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/user/password/reset": {
+			"post": {
+				"summary": "reset user password",
+				"operationId": "resetPassword",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"username": {
+										"type": "string"
+									},
+									"url": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"username",
+									"url"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/user/password/new": {
+			"post": {
+				"summary": "new user password after reset",
+				"operationId": "newPassword",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EmptyObj"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+
+		"/private/project/list": {
+			"post": {
+				"summary": "get list of projects",
+				"operationId": "listProject",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"query": {
+										"type": "object"
+									},
+									"options": {
+										"type": "object"
+									}
+								},
+								"required": [
+									"query",
+									"options"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/project/create": {
+			"post": {
+				"summary": "create a new project",
+				"operationId": "createProject",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/project/update": {
+			"post": {
+				"summary": "update an project",
+				"operationId": "updateProject",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/project/remove": {
+			"post": {
+				"summary": "remove a project",
+				"operationId": "removeProject",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/project/stats": {
+			"post": {
+				"summary": "stats of project",
+				"operationId": "statsProject",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+
+		"/private/facture/list": {
+			"post": {
+				"summary": "get list of facture",
+				"operationId": "listFacture",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"query": {
+										"type": "object"
+									},
+									"options": {
+										"type": "object"
+									}
+								},
+								"required": [
+									"query",
+									"options"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/facture/create": {
+			"post": {
+				"summary": "create a new facture",
+				"operationId": "createFacture",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/facture/update": {
+			"post": {
+				"summary": "update a facture",
+				"operationId": "updateFacture",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/facture/remove": {
+			"post": {
+				"summary": "remove a facture",
+				"operationId": "removeFacture",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/facture/stats": {
+			"post": {
+				"summary": "stats of facture",
+				"operationId": "statsFacture",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+
+		"/private/client/list": {
+			"post": {
+				"summary": "get list of Client",
+				"operationId": "listClient",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"query": {
+										"type": "object"
+									},
+									"options": {
+										"type": "object"
+									}
+								},
+								"required": [
+									"query",
+									"options"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/client/create": {
+			"post": {
+				"summary": "create a new Client",
+				"operationId": "createClient",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/client/update": {
+			"post": {
+				"summary": "update a Client",
+				"operationId": "updateClient",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/client/remove": {
+			"post": {
+				"summary": "remove a Client",
+				"operationId": "removeClient",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+
+		"/private/comment/list": {
+			"post": {
+				"summary": "get list of Comment",
+				"operationId": "listComment",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"query": {
+										"type": "object"
+									},
+									"options": {
+										"type": "object"
+									}
+								},
+								"required": [
+									"query",
+									"options"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/comment/create": {
+			"post": {
+				"summary": "create a new Comment",
+				"operationId": "createComment",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/comment/remove": {
+			"post": {
+				"summary": "remove a comment",
+				"operationId": "removeComment",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+
+		"/private/attachement/list": {
+			"post": {
+				"summary": "get list of dossiers",
+				"operationId": "listAttachement",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"query": {
+										"type": "object"
+									},
+									"options": {
+										"type": "object"
+									}
+								},
+								"required": [
+									"query",
+									"options"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/attachement/create": {
+			"post": {
+				"summary": "create a new attachement",
+				"operationId": "createAttachement",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"id_dossier": {
+										"type": "string"
+									},
+									"attachements": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"name": { "type": "string" },
+												"path": { "type": "string" },
+												"link": { "type": "string" },
+												"type": { "type": "string" }
+											},
+											"required": ["name", "path", "link"]
+										}
+									}
+								},
+								"required": ["attachements"]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/attachement/update": {
+			"post": {
+				"summary": "update an attachement",
+				"operationId": "updateAttachement",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": { "type": "string" },
+									"name": { "type": "string" },
+									"path": { "type": "string" },
+									"link": { "type": "string" },
+									"type": { "type": "string" },
+									"status": {
+										"type": "string",
+										"enum": ["waiting", "validated", "rejected"]
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/attachement/remove": {
+			"post": {
+				"summary": "remove a attachement",
+				"operationId": "removeAttachement",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"_id": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"_id"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		},
+		"/private/attachement/upload": {
+			"post": {
+				"summary": "upload files into server",
+				"operationId": "uploadAttachement",
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Ok"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"EmptyObj": {
+				"type": "object",
+				"properties": {}
+			},
+			"Pagination": {
+				"type": "object",
+				"properties": {
+					"page": {
+						"type": "number"
+					},
+					"limit": {
+						"type": "number"
+					}
+				},
+				"required": [
+					"page"
+				]
+			},
+			"MongoId": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id"
+				]
+			}
+		}
+	}
+}
