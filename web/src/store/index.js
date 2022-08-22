@@ -40,6 +40,7 @@ const getters = {
 	getAllStatus:(state)=>state.allStatus,
 	getTypeCommand:(state)=>state.typeCommande,
 	getClients:(state)=>state.clients,
+	IS_ADMIN:(state)=>state.current_user.role === "Administrateur"
 };
 
 const mutations = {
@@ -199,13 +200,27 @@ function uploadFile(url, formData, use_loader = false, notifyOnFailure = true, d
 
 store.openFile = (url) => {
 	console.log('openDocument, url:', url)
-	url = SERVER_ADDRESS + url
+	url = SERVER_ADDRESS + '/private' + url
 	let a = document.createElement('a')
 	a.href = url
 	a.target = '_blank'
 	document.body.appendChild(a)
 	a.click()
 	document.body.removeChild(a)
+	/*$.ajax({
+		type: 'GET',
+		url: SERVER_ADDRESS + '/private' + url,
+		xhrFields: {
+			responseType: 'blob'
+		},
+		success: function(blob){
+			console.log(blob.size);
+			var link=document.createElement('a');
+			link.href=window.URL.createObjectURL(blob);
+			link.download="Dossier_" + new Date() + ".pdf";
+			link.click();
+		}
+	});*/
 }
 store.successNotif = message => {
 	_vue.$notify({

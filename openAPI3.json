@@ -36,17 +36,7 @@
 				}
 			}
 		},
-		"/upload/*": {
-			"get": {
-				"description": "get public resources (imgs, files ...)",
-				"operationId": "uploads",
-				"responses": {
-					"200": {
-						"description": "ok"
-					}
-				}
-			}
-		},
+
 		"/login": {
 			"post": {
 				"summary": "login",
@@ -150,6 +140,17 @@
 				}
 			}
 		},
+        "/private/upload/*": {
+          "get": {
+            "description": "get public resources (imgs, files ...)",
+            "operationId": "uploads",
+            "responses": {
+              "200": {
+                "description": "ok"
+              }
+            }
+          }
+        },
 		"/private/user/list": {
 			"post": {
 				"summary": "get users list",
