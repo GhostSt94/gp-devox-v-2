@@ -14,7 +14,7 @@
                         <i class="bi bi-pencil-square me-1"></i>
                         Modifier
                     </button>
-                    <button @click="deleteProject" class="btn btn-outline-danger ms-2">
+                    <button :disabled="!$store.getters.IS_ADMIN" @click="deleteProject" class="btn btn-outline-danger ms-2">
                         <i class="bi bi-trash3-fill"></i>
                     </button>
                 </div>

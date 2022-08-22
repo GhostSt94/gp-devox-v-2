@@ -65,7 +65,7 @@
               </select>
               <span v-else>{{ u.role }}</span>
             </td>
-            <td v-show="IS_ADMIN">
+            <td v-show="$store.getters.IS_ADMIN">
               <div v-if="edit === true && editId === u._id" class="edit">
                 <i @click="updateRole(u._id)" class="bi bi-check me-1"></i>
                 <i @click="edit= false; editId= null" class="bi bi-x"></i>
@@ -151,8 +151,7 @@ export default {
     }
   },
   computed:{
-    ROLES(){ return this.$store.state.roles},
-    IS_ADMIN(){ return this.$store.state.current_user.role === 'Administrateur'}
+    ROLES(){ return this.$store.state.roles}
   },
   methods: {
     setPage(page){

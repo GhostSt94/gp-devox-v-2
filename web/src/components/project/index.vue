@@ -73,7 +73,7 @@
                   <ul class="dropdown-menu">
                     <li  @click="$router.push(`/private/project/${p._id}`)"><span class="dropdown-item">Voir Détails</span></li>
                     <div class="dropdown-divider"></div>
-                    <li @click="deleteProject(p._id)"><span class="dropdown-item text-danger">Supprimer</span></li>
+                    <li><span @click="deleteProject(p._id)" :class="{'disabled text-light': !$store.getters.IS_ADMIN}" class="dropdown-item text-danger">Supprimer</span></li>
                   </ul>
                 </div>
               </div>

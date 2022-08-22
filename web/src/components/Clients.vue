@@ -30,7 +30,7 @@
               <ul class="dropdown-menu">
                 <li @click="()=>{$modal.show('client-details-modal');selectedClient=cl}"><span class="dropdown-item">Détails</span></li>
                 <div class="dropdown-divider"></div>
-                <li @click="deleteClient(cl._id)"><span class="dropdown-item text-danger">Supprimer</span></li>
+                <li><span @click="deleteClient(cl._id)" :class="{'disabled text-light': !$store.getters.IS_ADMIN}" class="dropdown-item text-danger">Supprimer</span></li>
               </ul>
             </div>
           </div>
