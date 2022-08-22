@@ -26,27 +26,28 @@
                 <tbody class="bg-light">
                     <tr v-for="f in factures" :key="f._id">
                         <td>{{f.num}}</td>
-                        <td>{{$SHARED.utils.getDate(f.dateFacture, 'DD/MM/YYYY')}}</td>
-                        <td>{{$SHARED.utils.getDate(f.datePaiement, 'DD/MM/YYYY')}}</td>
+                        <td>{{f.dateFacture ? $SHARED.utils.getDate(f.dateFacture, 'DD/MM/YYYY') : '-- / -- / ----'}}</td>
+                        <td>{{f.datePaiement ? $SHARED.utils.getDate(f.datePaiement, 'DD/MM/YYYY') : '-- / -- / ----'}}</td>
                         <td class="text-success">{{$SHARED.utils.numberToMoneyFormat(f.montant)}}</td>
                         <td>
-                            <select v-if="factureUpdateId === f._id"></select>
+                            <select v-if="factureUpdateId === f._id" class="form-select form-select-sm" v-model="newStatus">
+                              <option v-for="st in FACTURE_STATUS" :key="st">{{st}}</option>
+                            </select>
                             <div v-else>
-                              <i class="bi bi-circle-fill me-1"></i>
+                              <i :class="dotStyle[f.status]" class="bi bi-circle-fill me-1"></i>
                               {{f.status}}
                             </div>
                         </td>
                         <td>
-                          <div  v-if="factureUpdateId === f._id">
-                            <i class="bi bi-check"></i>
-                            <i class="bi bi-x"></i>
+                          <div class="updateS" v-if="factureUpdateId === f._id">
+                            <button @click="updateStatus" class="btn me-2 p-0"><i class="bi bi-check"></i></button>
+                            <button @click="factureUpdateId=null" class="btn p-0"><i class="bi bi-x"></i></button>
                           </div>
                           <div v-else class="dropdown">
                               <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   <i class="bi bi-three-dots text-end"></i>
                               </button>
                               <ul class="dropdown-menu">
-<!--                                  TODO: facture modify status-->
                                   <li @click="factureUpdateId= f._id"><span class="dropdown-item">Modifier status</span></li>
                                   <li @click="$store.openFile(f.attachements[0].file.link)"><span :class="f.attachements.length === 0 && 'disabled'" class="dropdown-item">Voir fichier</span></li>
                                   <div class="dropdown-divider"></div>
@@ -143,7 +144,13 @@ export default {
                 count: 0
             },
             fileInputText:'Veuillez selectionner un fichier',
-          factureUpdateId: null
+            factureUpdateId: null,
+          newStatus:null,
+          dotStyle:{
+              prévue: 'text-secondary',
+              envoyer: 'text-warning',
+              payer: 'text-success'
+          }
         }
     },
     methods:{
@@ -191,11 +198,13 @@ export default {
                         console.log('uploadFile', ar);
 
                         this.$store.successNotif(this.$SHARED.messages.facture.create_succeeded)
-                        this.$modal.hide('facture-modal')
-                        this.getFactures()
                     })
                 }
             })
+          .finally(()=> {
+            this.$modal.hide('facture-modal')
+            this.getFactures()
+          })
         },
         deleteFacture(facture){
             console.log('deleteFacture');
@@ -218,6 +227,22 @@ export default {
                 this.$store.successNotif(this.$SHARED.messages.facture.delete_succeeded)
                 this.getFactures()
             })
+        },
+        updateStatus(){
+          console.log('updateStatus')
+          if(_.isEmpty(this.newStatus)){
+            this.$store.errorNotif('Veuillez selectionner un status')
+            return
+          }
+
+          this.$store.dispatchAsync(this.$SHARED.services.facture.update, {
+            status: this.newStatus,
+            _id: this.factureUpdateId
+          }).then(ar =>{
+            this.$store.successNotif(this.$SHARED.messages.update_success)
+            this.factureUpdateId= null
+            this.getFactures()
+          })
         },
         //
         setPage(page){
@@ -253,7 +278,12 @@ tbody tr td:first-child{
 }
 .bi-circle-fill{
     font-size: .7rem;
-    color: var(--color-1);
+}
+.updateS i{
+  font-size: 1.2rem;
+}
+.updateS button:hover{
+  outline: solid var(--color-4);
 }
 .btn-upload{
     background: var(--color-2);
