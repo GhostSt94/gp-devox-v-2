@@ -61,28 +61,26 @@ name:'login',
       }
 
       this.$store.dispatchAsync(this.$SHARED.services.login, {
-					username: this.username,
-					password: this.pwd
-				}).then((data) => {
-					this.$store.commit('SET_CURRENT_USER', data)
-					this.$router.push({name: 'home'});
-				});
+        username: this.username,
+        password: this.pwd
+      }).then((data) => {
+        this.$store.commit('SET_CURRENT_USER', data)
+        this.$router.push({name: 'home'});
+      });
     },
-    forgetPassword(){
+    forgetPassword() {
       console.log('forgetPassword')
 
       let data = {
-        url: window.location.origin +this.$SHARED.services.user.resetPassword,
+        url: window.location.origin + this.$SHARED.services.user.resetPassword,
         username: this.modal_username
       }
-      this.$store.dispatchAsync( this.$SHARED.services.user.resetPassword, data).then(ar=>{
+      this.$store.dispatchAsync(this.$SHARED.services.user.resetPassword, data).then(ar => {
         console.log(ar)
 
         this.$modal.hide('forget-password-modal')
         this.$store.successNotif(this.$SHARED.messages.resetPassword);
       })
-    },
-    mounted(){
     }
   }
 }

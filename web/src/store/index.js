@@ -87,7 +87,15 @@ const actions = {
 				});
 			}
 		})
-	}
+	},
+    isConnected(_) {
+        console.log('`$store.isConnected`')
+        return new Promise((resolve, reject) =>{
+            dispatchAsync(_vue.$SHARED.services.isConnected, {}).then(ar=>{
+                !ar ? resolve() : reject()
+            })
+        })
+    },
 };
 
 let store = new Vuex.Store({

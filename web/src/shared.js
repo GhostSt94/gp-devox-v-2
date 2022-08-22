@@ -6,6 +6,7 @@ const fields = {
 const services = {
 	login: '/login',
 	checkSession: '/getSessionUser',
+	isConnected: '/is_connected',
 	user: {
 		list: '/private/user/list',
 		create: '/private/user/create',
@@ -84,6 +85,7 @@ const messages = {
 	comment:{
 		create_succeeded: "Commentaire ajouté!"
 	},
+	update_success: "Modifié avec succés",
 	resetPassword: 'Un mail contenant le lien pour reinitialiser votre mot de passe a été envoyé'
 };
 const collections = {

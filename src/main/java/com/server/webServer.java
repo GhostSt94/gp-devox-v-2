@@ -120,6 +120,7 @@ public class webServer extends AbstractVerticle {
 							sendResponse(response, routingContext.response());
 						});
 						routerFactory.operation("getSessionUser").handler(this::getSessionUserHandler);
+						routerFactory.operation("isConnected").handler(this::isConnectedHandler);
 						// user
 						routerFactory.operation("listUser").handler(this::userHandler);
 						routerFactory.operation("createUser").handler(this::userHandler);
@@ -364,6 +365,27 @@ public class webServer extends AbstractVerticle {
 			responseContent
 					.put("succeeded", false)
 					.put("message", Exceptions.SESSION_EXPIRED.failureCode());
+		}
+		sendResponse(responseContent, resp);
+	}
+
+	private void isConnectedHandler(RoutingContext routingContext) {
+		logger.debug("Handler `isConnectedHandler`");
+
+		HttpServerRequest req = routingContext.request();
+		HttpServerResponse resp = req.response();
+
+		JsonObject responseContent = new JsonObject();
+		if (routingContext.session() != null && routingContext.user() != null) {
+			JsonObject principal = routingContext.user().principal();
+			logger.debug("principal: " + principal);
+			responseContent
+					.put("succeeded", true)
+					.put("data", true);
+		} else {
+			responseContent
+					.put("succeeded", true)
+					.put("data", false);
 		}
 		sendResponse(responseContent, resp);
 	}

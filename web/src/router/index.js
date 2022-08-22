@@ -18,6 +18,15 @@ const routes = [
 	{
 		path: '/',
 		component: landingContainer,
+		beforeEnter: (to, from, next) => {
+			console.log("navGard, landing")
+			store.dispatch('isConnected').then(() => {
+				next();
+			},()=>{
+				next({ name: 'home' })
+			})
+
+		},
 		children: [
 			{
 				path: '',

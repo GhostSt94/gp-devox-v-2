@@ -109,6 +109,26 @@
 				}
 			}
 		},
+        "/is_connected": {
+        "post": {
+          "summary": "all requests",
+          "operationId": "isConnected",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObj"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Ok"
+            }
+          }
+        }
+      },
 		"/private/*": {
 			"get": {
 				"description": "all requests",
