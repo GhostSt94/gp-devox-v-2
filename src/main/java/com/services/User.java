@@ -138,7 +138,9 @@ public class User extends AbstractVerticle {
 
             JsonObject mail_data= new JsonObject()
                     .put("to",body.getString("email"))
-                    .put("password", password);
+                    .put("username",username)
+                    .put("password", password)
+                    .put("url", body.getString("url"));
 
             //Promise<String> insertUserPromise = Promise.promise();
             Future.<String>future(promise ->{
@@ -786,7 +788,7 @@ public class User extends AbstractVerticle {
                 message.setTo(msg.getString("to"));
                 message.setSubject(msg.getString("subject","GP-DEVOX new account"));
                 if(msg.containsKey("password"))
-                    message.setHtml("<p>Votre mot de passe est <b>"+ msg.getString("password")+"</b></p><p>Veuillez le changer le plus tôt possible<p>");
+                    message.setHtml("<p>Un nouveau compte a été crée dans "+msg.getString("url", "GP-Devox")+" </p><br><p>Nom d'utilisateur: <b>"+msg.getString("username")+"</b></p><p>Mot de passe: <b>"+ msg.getString("password")+"</b></p><br><p>Veuillez changer votre mot de passe le plus tôt possible<p>");
 
                 if (msg.containsKey("body"))
                     message.setHtml(msg.getString("body"));

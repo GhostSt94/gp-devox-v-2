@@ -409,7 +409,7 @@ public class webServer extends AbstractVerticle {
 					serviceName = Services.USER_LIST;
 					break;
 				case "create":
-					//body.put("user", routingContext.user().principal());
+					body.put("url", routingContext.request().host());
 					serviceName = Services.USER_CREATE;
 					break;
 				case "update":
