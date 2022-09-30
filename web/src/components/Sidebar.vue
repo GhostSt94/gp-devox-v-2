@@ -17,7 +17,7 @@
 			<li :class="{ 'active': projectRoutes.some(e => e === $route.name) }">
 				<router-link :to="{name:'projects'}">
 					<i class="bi bi-list-stars"></i>
-					<span class="text">Projects</span>
+					<span class="text">Projets</span>
 				</router-link>
 			</li>
 			<li :class="{ 'active': $route.name === 'clients' }">
@@ -29,7 +29,7 @@
 			<li :class="{ 'active': $route.name === 'users' }">
 				<router-link :to="{name:'users'}">
 					<i class='bi bi-people-fill' ></i>
-					<span class="text">Users</span>
+					<span class="text">Utilisateurs</span>
 				</router-link>
 			</li>
 		</ul>

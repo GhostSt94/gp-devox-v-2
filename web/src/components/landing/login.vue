@@ -1,23 +1,23 @@
 <template>
     <div class="dynamic-div">
         <div class="py-3">
-            <h1>Welcome</h1>
-            <p>Please enter your details.</p>
+            <h1>Bienvenu</h1>
+            <p>Veuillez saisir vos coordonnées.</p>
             </div>
             <div>
             <div class="mb-3">
-                <label for="email" class="form-label">Email / Username</label>
+                <label for="email" class="form-label">Nom d'utilisateur</label>
                 <input type="text" v-model="username" class="form-control" id="email" placeholder="Enter Email here">
             </div>
             <div>
-                <label for="pwd" class="form-label">Password</label>
+                <label for="pwd" class="form-label">Mot de passe</label>
                 <input type="password" v-model="pwd" class="form-control" id="pwd" placeholder="Enter password here">
             </div>
             <div class="text-end">
-                <small @click="$modal.show('forget-password-modal')" class="pointer h-underline">Forgot password ?</small>
+                <small @click="$modal.show('forget-password-modal')" class="pointer h-underline">Mot de passe oublié ?</small>
             </div>
             <div class="d-grid my-3">
-                <button @click="login" class="btn btn-primary">Login</button>
+                <button @click="login" class="btn btn-primary">Se Connecter</button>
             </div>
         </div>
 

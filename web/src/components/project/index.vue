@@ -9,7 +9,7 @@
         <span @click="filter = !filter" class="pe-5 h-underline pointer">Filtrer</span>
         <button  v-show="$store.getters.IS_ADMIN" @click="$router.push({name: 'addProject'})" class="btn btn-primary">
             <i class="plus icon"></i>
-            New Project
+            Nouveau projet
         </button>
       </div>
     </div>
@@ -81,7 +81,7 @@
 
             <div class="row project-body px-3">
               <div class='d-flex justify-content-center flex-column'>
-                <h3>{{ p.title }}</h3>
+                <h3 :title="p.title">{{ $SHARED.utils.splitTooLongText(p.title, 45) }}</h3>
                 <p>{{ p.client.nom }}</p>
               </div>
             </div>
@@ -198,6 +198,7 @@ export default {
   },
   mounted(){
     this.getProjects()
+    this.getClients()
   }
 }
 </script>
@@ -228,11 +229,12 @@ hr.View.Times{ background: var(--green) }
 .project-body{
   min-height: 100px;
   white-space: pre-wrap;
-  word-break: break-all;
+  /*word-break: break-all;*/
 }
 .project-body h3{
   font-family: var(--poppins);
   font-weight: bolder;
+  font-size: 1.2rem;
 }
 .project-body p{
   color: grey;

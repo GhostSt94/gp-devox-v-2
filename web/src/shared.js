@@ -164,7 +164,9 @@ const utils = {
 		}else{
 			return true
 		}
-	}
+	},
+	// take string and number of character to display
+	splitTooLongText:(str, n) => (str.length > n) ? str.slice(0, n-1) + '...' : str
 };
 
 const consts={

@@ -3,11 +3,11 @@
     <div class="row justify-content-around stats">
       <div class="col-5 text-center border bg-light p-2 rounded">
         <h3 class="primary">{{ projectCount}}</h3>
-        <h5>Projects</h5>
+        <h5>Projet(s)</h5>
       </div>
       <div class="col-5 text-center border bg-light p-2 rounded">
         <h3 class="secondary">{{ factureCount}}</h3>
-        <h5>Facture</h5>
+        <h5>Facture(s)</h5>
       </div>
     </div>
   </div>

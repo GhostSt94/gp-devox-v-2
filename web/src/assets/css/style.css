@@ -129,6 +129,15 @@ select option{
     color: grey !important;
     font-weight: lighter !important;
 }
+.back{
+    font-size: 1.2rem;
+    border-radius: 100%;
+    padding: 5px;
+}
+.back:hover{
+    background: var(--light);
+    cursor: pointer;
+}
 /* .custom-table :is(tr td, tr th){text-align: center !important;} */
 .ui.table[class*="single line"]{white-space: pre-wrap !important;}
 span.currentPage{color: var(--main-blue);}

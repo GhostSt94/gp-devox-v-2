@@ -20,7 +20,10 @@
     <div class="container py-4">
 
       <div class="row g-3 g-md-3 g-sm-2">
-        <div v-for="cl in clients" :key="cl._id" class="col-sm-4 col-md-4 col-lg-3">
+        <div v-if="clients.length===0" class="text-center text-muted">
+          <h6>Aucun client trouver</h6>
+        </div>
+        <div v-else v-for="cl in clients" :key="cl._id" class="col-sm-4 col-md-4 col-lg-3">
           <div class="h-100 p-2 border rounded bg-light d-flex justify-content-between client">
             <h6 class="m-1">{{ cl.nom }}</h6>
             <div class="dropdown">
@@ -142,7 +145,6 @@ export default {
 
           this.clients = ar.docs
           this.pagination.count = ar.count
-
       })
     },
     addClient(){

@@ -2,6 +2,9 @@
     <div class="container">
 
         <div class="row">
+          <div class="col-auto pt-1">
+            <i @click="$router.push({name: 'projects'})" class="bi bi-arrow-left back"></i>
+          </div>
             <div class="col">
                 <h2>Détails projets</h2>
             </div>
