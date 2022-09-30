@@ -49,13 +49,13 @@
             <label>Prénom</label>
             <input type="text" v-model="prenom" class="form-control">
         </div>
-        <div class="col-auto p-5">
-            <label>Username</label>
-            <input type="text" v-model="username" class="form-control">
-        </div>
+<!--        <div class="col-auto p-5">-->
+<!--            <label>Username</label>-->
+<!--            <input type="text" v-model="username" class="form-control">-->
+<!--        </div>-->
         <div class="col-12 text-end p-5">
-            <button @click="edit= false" class="btn btn-info me-2">annuler</button>
-            <button @click="editUser" class="btn btn-secondary">submit</button>
+          <button @click="editUser" class="btn btn-secondary me-2">submit</button>
+          <button @click="edit= false" class="btn btn-info">annuler</button>
         </div>
     </div>
   </div>
@@ -90,7 +90,7 @@ export default {
         editUser(){
             console.log('editUser');
 
-            if(this.nom === '' && this.username === '' && this.prenom === ''){
+            if(this.nom === '' && this.prenom === ''){
                 this.$store.errorNotif("veuillez entrer un champ")
                 return
             }
