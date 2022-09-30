@@ -183,7 +183,7 @@ export default {
             }
             this.facture.id_project=this.projectId
             
-            var fileInp= this.$refs.attachementFacture
+            let fileInp= this.$refs.attachementFacture
 
             this.$store.dispatchAsync(this.$SHARED.services.facture.create, this.facture).then(ar=>{
                 console.log('addFacture', ar);
@@ -198,13 +198,25 @@ export default {
                         console.log('uploadFile', ar);
 
                         this.$store.successNotif(this.$SHARED.messages.facture.create_succeeded)
+
+                        this.getFactures()
+
+                        let f = this.facture
+                        f.num=''
+                        f.dateFacture= null
+                        f.datePaiement= null
+                        f.status= null
+                        f.montant= null
+                        this.fileInputText= 'Veuillez selectionner un fichier'
+                        fileInp.value = null
+
+                        this.$modal.hide('facture-modal')
                     })
+                }else{
+                  this.getFactures()
+                  this.$modal.hide('facture-modal')
                 }
             })
-          .finally(()=> {
-            this.$modal.hide('facture-modal')
-            this.getFactures()
-          })
         },
         deleteFacture(facture){
             console.log('deleteFacture');
