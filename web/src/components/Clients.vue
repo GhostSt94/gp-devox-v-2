@@ -9,9 +9,9 @@
         <input @input="search" v-model="searchInput" type="text" class="form-control" placeholder="search">
       </div>
       <div class="col text-end">
-        <button @click="$modal.show('client-modal')" class="btn btn-primary">
-            <i class="plus icon"></i>
-            New Client
+        <button v-show="$store.getters.IS_ADMIN" @click="$modal.show('client-modal')" class="btn btn-primary">
+          <i class="bi bi-plus"></i>
+            Nouveau Client
         </button>
       </div>
     </div>

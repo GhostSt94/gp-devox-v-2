@@ -6,8 +6,8 @@
         <h2>Tous les projets</h2>
       </div>
       <div class="col text-end">
-        <span @click="filter = !filter" class="pe-5 h-underline pointer">Filter</span>
-        <button @click="$router.push({name: 'addProject'})" class="btn btn-primary">
+        <span @click="filter = !filter" class="pe-5 h-underline pointer">Filtrer</span>
+        <button  v-show="$store.getters.IS_ADMIN" @click="$router.push({name: 'addProject'})" class="btn btn-primary">
             <i class="plus icon"></i>
             New Project
         </button>

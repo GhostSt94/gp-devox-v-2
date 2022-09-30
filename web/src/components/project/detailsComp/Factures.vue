@@ -5,7 +5,7 @@
                 <h2>Factures</h2>
             </div>
             <div class="col text-end">
-                <button @click="$modal.show('facture-modal')" class="btn btn-secondary">
+                <button v-show="$store.getters.IS_ADMIN" @click="$modal.show('facture-modal')" class="btn btn-secondary">
                     <i class="bi bi-plus"></i>
                 </button>
             </div>

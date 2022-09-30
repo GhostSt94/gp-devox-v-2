@@ -7,9 +7,9 @@
       </div>
       <div class="col text-end">
         <!-- <span @click="filter = !filter" class="pe-5 h-underline pointer">Filter</span> -->
-        <button @click="$modal.show('user-modal')" class="btn btn-primary">
-            <i class="plus icon"></i>
-            New User
+        <button v-show="$store.getters.IS_ADMIN" @click="$modal.show('user-modal')" class="btn btn-primary">
+          <i class="bi bi-plus"></i>
+            Nouveau Utilisateur
         </button>
       </div>
     </div>

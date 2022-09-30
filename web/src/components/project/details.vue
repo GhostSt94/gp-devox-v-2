@@ -10,11 +10,11 @@
             </div>
             <div class="col text-end">
                 <div v-if="!editing">
-                    <button @click="editing=!editing" class="btn btn-secondary">
+                    <button v-show="$store.getters.IS_ADMIN" @click="editing=!editing" class="btn btn-secondary">
                         <i class="bi bi-pencil-square me-1"></i>
                         Modifier
                     </button>
-                    <button :disabled="!$store.getters.IS_ADMIN" @click="deleteProject" class="btn btn-outline-danger ms-2">
+                    <button v-show="$store.getters.IS_ADMIN" @click="deleteProject" class="btn btn-outline-danger ms-2">
                         <i class="bi bi-trash3-fill"></i>
                     </button>
                 </div>
