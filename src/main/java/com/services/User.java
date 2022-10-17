@@ -778,14 +778,14 @@ public class User extends AbstractVerticle {
             vertx.eventBus().request(Services.DB_FIND_ONE, msg, ar -> {
                 if (ar.failed()) {
                     logger.error(ar.cause(), ar.cause());
-                    message.fail(4, ar.cause().getMessage());
+                    message.fail(5, ar.cause().getMessage());
                 } else {
                     JsonObject resultat = (JsonObject) ar.result().body();
                     if (resultat == null) {
-                        message.fail(4, "user not found");
+                        message.fail(5, "expired");
                     } else {
                         if(System.currentTimeMillis() > resultat.getLong("expireAt")){
-                            message.fail(4, "expired");
+                            message.fail(5, "expired");
                         }else{
                             message.reply(true);
                         }

@@ -99,8 +99,11 @@ const actions = {
 	isResetPassword(_, {userId, resetPin}) {
 		console.log('`$store.isResetPassword`')
 		return new Promise((resolve, reject) =>{
-			dispatchAsync(_vue.$SHARED.services.user.isResetPassword, {userId, resetPin}, false, false).then(ar=>{
+			dispatchAsync(_vue.$SHARED.services.user.isResetPassword, {userId, resetPin}).then(ar=>{
 				ar ? resolve() : reject()
+			}, ar=>{
+				router.push({name: 'login'})
+				reject()
 			})
 		})
 	},
