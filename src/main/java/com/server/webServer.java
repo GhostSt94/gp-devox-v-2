@@ -130,6 +130,7 @@ public class webServer extends AbstractVerticle {
 						routerFactory.operation("generatePassword").handler(this::userHandler);
 						routerFactory.operation("resetPassword").handler(this::userHandler);
 						routerFactory.operation("newPassword").handler(this::userHandler);
+						routerFactory.operation("checkUserResetPwd").handler(this::isResetPwdHandler);
 
 						// Project
 						routerFactory.operation("listProject").handler(this::projectHandler);
@@ -237,8 +238,10 @@ public class webServer extends AbstractVerticle {
 	private void globalHandler(RoutingContext routingContext) {
 		logger.debug("Handler `globalHandler`, path: " + routingContext.request().path() + ", body: " + routingContext.getBody());
 
-		if (routingContext.request().method().toString().equals("GET")) {
-			switch (routingContext.request().path()) {
+		HttpServerRequest req = routingContext.request();
+
+		if (req.method().toString().equals("GET")) {
+			switch (req.path()) {
 				case "/signup":
 				case "/login":
 				case "/private":
@@ -388,6 +391,14 @@ public class webServer extends AbstractVerticle {
 					.put("data", false);
 		}
 		sendResponse(responseContent, resp);
+	}
+
+	private void isResetPwdHandler(RoutingContext routingContext) {
+		logger.debug("Handler `isResetPwdHandler`");
+
+		vertx.eventBus().request(Services.IS_USER_RESET_PASSWORD,
+				routingContext.getBodyAsJson(),
+				ar -> defaultHandler(ar, routingContext));
 	}
 
 	// ------------------		 Project (CRUD)		----------------------

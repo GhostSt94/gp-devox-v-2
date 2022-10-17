@@ -99,7 +99,15 @@ const routes = [
 	{
 		path: '/user/password/reset/:userId/:resetPin',
 		name: 'resetPassword',
-		component: ()=> import( '@/components/login/resetPassword' )
+		component: ()=> import( '@/components/login/resetPassword' ),
+		beforeEnter: (to, from, next) => {
+			console.log("navGard, resetPwd")
+			let userId = to.params.userId
+			let resetPin = to.params.resetPin
+			store.dispatch("isResetPassword", {userId, resetPin}).then(() => {
+				next();
+			})
+		},
 	},
 	{
 		path: '*',

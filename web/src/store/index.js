@@ -96,6 +96,14 @@ const actions = {
             })
         })
     },
+	isResetPassword(_, {userId, resetPin}) {
+		console.log('`$store.isResetPassword`')
+		return new Promise((resolve, reject) =>{
+			dispatchAsync(_vue.$SHARED.services.user.isResetPassword, {userId, resetPin}, false, false).then(ar=>{
+				ar ? resolve() : reject()
+			})
+		})
+	},
 };
 
 let store = new Vuex.Store({

@@ -129,6 +129,38 @@
           }
         }
       },
+      	"/is-reset-password": {
+        "post": {
+          "summary": "all requests",
+          "operationId": "checkUserResetPwd",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "string"
+                    },
+                    "resetPin": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "userId",
+                    "resetPin"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Ok"
+            }
+          }
+        }
+      },
 		"/private/*": {
 			"get": {
 				"description": "all requests",

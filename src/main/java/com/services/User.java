@@ -64,6 +64,9 @@ public class User extends AbstractVerticle {
             //new Password
             vertx.eventBus().consumer(Services.NEW_PASSWORD, this::newPassword);
 
+            //check if userId is id reset_password collection
+            vertx.eventBus().consumer(Services.IS_USER_RESET_PASSWORD, this::isUserResetPassword);
+
             startPromise.complete();
         } catch (Exception e) {
             logger.error(e, e);
@@ -754,6 +757,44 @@ public class User extends AbstractVerticle {
         } catch (Exception e) {
             logger.error(e, e);
             hdlrModifyUser.fail(Exceptions.TECHNICAL_ERROR.failureCode(),
+                    Exceptions.TECHNICAL_ERROR.getMessage());
+        }
+    }
+
+    private void isUserResetPassword(Message message){
+        try{
+            JsonObject body = (JsonObject) message.body();
+            logger.debug("message: " + body);
+
+            String user_id = body.getString("userId");
+            String reset_pin = body.getString("resetPin");
+
+            JsonObject msg = new JsonObject()
+                    .put("collection", Collections.RESET_PASSWORD)
+                    .put("query", new JsonObject()
+                            .put("userId", user_id)
+                            .put("resetPin", reset_pin));
+
+            vertx.eventBus().request(Services.DB_FIND_ONE, msg, ar -> {
+                if (ar.failed()) {
+                    logger.error(ar.cause(), ar.cause());
+                    message.fail(4, ar.cause().getMessage());
+                } else {
+                    JsonObject resultat = (JsonObject) ar.result().body();
+                    if (resultat == null) {
+                        message.fail(4, "user not found");
+                    } else {
+                        if(System.currentTimeMillis() > resultat.getLong("expireAt")){
+                            message.fail(4, "expired");
+                        }else{
+                            message.reply(true);
+                        }
+                    }
+                }
+            });
+        }catch (Exception e){
+            logger.error(e, e);
+            message.fail(Exceptions.TECHNICAL_ERROR.failureCode(),
                     Exceptions.TECHNICAL_ERROR.getMessage());
         }
     }

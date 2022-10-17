@@ -16,6 +16,7 @@ const services = {
 		generetePassword: '/private/user/password/generate',
 		resetPassword: '/user/password/reset/',
 		newPassword: '/user/password/new',
+        isResetPassword: '/is-reset-password'
 	},
 	attachement:{
 		list:'/private/attachement/list',

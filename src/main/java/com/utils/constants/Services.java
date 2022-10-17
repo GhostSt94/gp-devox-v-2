@@ -35,6 +35,7 @@ public class Services {
     public static final String GENERATE_NEW_PASSWORD = "generateNewPassword";
     public static final String RESET_PASSWORD = "resetPassword";
     public static final String NEW_PASSWORD = "newPassword";
+    public static final String IS_USER_RESET_PASSWORD = "checkResetPassword";
 
     /*----------------------------------
     *               PROJECT
